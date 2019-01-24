@@ -1,0 +1,47 @@
+import java.util.*;
+
+public class faucetTemp {
+
+    public static final double desired = 60.0; // desired temperature (Fahrenheit)
+    public static final double max = 90.0; // max allowed temperature (Fahrenheit)
+    public static final double min = 40.0; // min allowed temperature (Fahrenheit)
+    public static final double minGenerated = 20.0; // min temperature to be tested (Fahrenheit)
+    public static final double maxGenerated = 100.0; // max temperature to be tested (Fahrenheit)
+    public static final String units = " degrees Fahrenheit"; // easily change desired temperature
+    public static final int checks = 10; // demonstrations of algorithm
+
+    public static void main (String[] args){
+        Random r = new Random();
+        for (int i = 0; i < checks; i++) {
+            double initTemp = minGenerated + (maxGenerated - minGenerated) * r.nextDouble(); // generates random double temp between minGenerated and maxGenerated
+            double finalTemp = fixTemp(initTemp);
+            System.out.println("Old Temp: " + initTemp + units + ", New Temp: " + finalTemp + units);
+            /*if ((initTemp < desired) && (finalTemp > initTemp) && (finalTemp > desired)) {
+                System.out.println("passed"); // passes if initial was too cold and final is hotter than desired
+            } else if ((initTemp > desired) && (finalTemp < initTemp) && (finalTemp < desired)) {
+                System.out.println("passed") // passes if initial was too hot and final is colder than desired
+            } else if ((initTemp == desired) && (finalTemp == initTemp)) {
+                System.out.println("passed"); // passes if initial and final are equal to desired
+            } else {
+                System.out.println("failed"); // otherwise fail
+            }*/
+        }
+    }
+
+    public static double fixTemp(double temp) { // the colder it is, the further above "desired" temperature
+        double result = desired - ((temp - desired) / 2); // the hotter it is, the further below "desired" temperature
+        if (result > max) { // imagined as temp for an automatic faucet with no manual temp control
+            result = max; // people want cold water when it's warm, and hot water when it's cold
+        } else if (result < min) {
+            result = min;
+        }
+        return result;
+    }
+
+    private static double sign(double num) {
+        if (num < 0) {
+            return -1.0;
+        }
+        return 1.0;
+    }
+}
