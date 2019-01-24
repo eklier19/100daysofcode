@@ -38,10 +38,4 @@ public class faucetTemp {
         return result;
     }
 
-    private static double sign(double num) {
-        if (num < 0) {
-            return -1.0;
-        }
-        return 1.0;
-    }
 }
