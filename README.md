@@ -1,4 +1,2 @@
-# 100daysofcode
+# misc code / projects
 
-
-100 days of code challenge
